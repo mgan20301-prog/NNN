@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>توثيق حساب الديسكورد</title>
+    <style>
+        body {
+            /* هنا تقدر تغير رابط الصورة اللي تبيه يكون خلفية */
+            background-image: url('https://imgur.com/a/vrIYJGE'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #2c2f33; /* لون احتياطي لو ما اشتغلت الصورة */
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-box {
+            background-color: rgba(35, 39, 42, 0.9); /* خلفية سوداء شفافة عشان تبان صورتك */
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #7289da;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 { color: #7289da; margin-bottom: 20px; }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #2c2f33;
+            color: white;
+            text-align: center;
+        }
+
+        .btn {
+            background-color: #7289da;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+
+        .btn:hover { background-color: #5b6eae; }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <h2>تسجيل البيانات</h2>
+        <form>
+            <input type="text" placeholder="يوزر الديسكورد (مثلاً: mgan#0001)" required>
+            <input type="text" placeholder="الرتبة المطلوبة" required>
+            <button type="submit" class="btn">إرسال البيانات</button>
+        </form>
+    </div>
+
+</body>
+</html>
