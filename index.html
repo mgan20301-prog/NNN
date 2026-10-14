@@ -3,303 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ديوان الحرف | لوحة الأبيات الشعرية</title>
-    <!-- استيراد خطوط عربية مميزة من جوجل -->
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>منصة برمج - تعلم البرمجة من الصفر</title>
+    <!-- استيراد الخطوط والأيقونات -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --gold: #d4af37;
-            --gold-hover: #f3e5ab;
-            --accent: #3b82f6;
+            --primary-color: #4f46e5;
+            --secondary-color: #312e81;
+            --accent-color: #10b981;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --white: #ffffff;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
         }
 
         body {
-            font-family: 'Cairo', sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem 1rem;
+            color: var(--text-color);
+            line-height: 1.6;
         }
 
+        /* شريط التنقل العلوي */
         header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        header h1 {
-            font-family: 'Amiri', serif;
-            font-size: 3rem;
-            color: var(--gold);
-            margin-bottom: 0.5rem;
-            letter-spacing: 1px;
-        }
-
-        header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        .container {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 800px;
+            z-index: 1000;
         }
 
-        /* بطاقة البيت الشعري */
-        .poem-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .poem-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--gold);
-        }
-
-        .poem-content {
-            font-family: 'Amiri', serif;
-            font-size: 1.8rem;
-            line-height: 2.2;
-            text-align: center;
-            color: var(--text-main);
-            margin-bottom: 1.5rem;
-        }
-
-        .poem-verse {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .poet-info {
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 1rem;
-            font-size: 0.95rem;
-            color: var(--text-muted);
+            padding: 1rem 2rem;
         }
 
-        .poet-name {
-            color: var(--gold);
-            font-weight: 600;
-        }
-
-        /* أزرار التفاعل */
-        .card-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-action {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-muted);
-            padding: 6px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.85rem;
-        }
-
-        .btn-action:hover {
-            background: var(--gold);
-            color: #000;
-            border-color: var(--gold);
-        }
-
-        /* قسم إضافة بيت جديد */
-        .add-poem-section {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-top: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .add-poem-section h3 {
-            font-family: 'Amiri', serif;
-            color: var(--gold);
-            margin-bottom: 1.5rem;
+        .logo {
             font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            text-decoration: none;
         }
 
-        .form-group {
-            margin-bottom: 1.2rem;
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: var(--text-muted);
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.3s;
         }
 
-        .form-control {
-            width: 100%;
-            padding: 12px;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.6rem 1.5rem;
             border-radius: 8px;
-            color: var(--text-main);
-            font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
         }
 
-        .form-control:focus {
-            outline: none;
-            border-color: var(--gold);
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
         }
 
-        .btn-submit {
-            background: var(--gold);
-            color: #000;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.2s;
-            width: 100%;
-            font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
-        }
-
-        .btn-submit:hover {
-            background: var(--gold-hover);
-        }
-
-        footer {
-            margin-top: 4rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
+        /* القسم الرئيسي (Hero Section) */
+        .hero {
+            padding: 10rem 2rem 5rem;
+            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
             text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #475569;
+            margin-bottom: 2rem;
+        }
+
+        /* قسم الدورات */
+        .courses {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            color: var(--secondary-color);
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        .course-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .course-body {
+            padding: 1.5rem;
+        }
+
+        .course-body p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        /* التذييل (Footer) */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+        }
+
+        /* استجابة الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- الشريط العلوي -->
     <header>
-        <h1>ديوان الحرف</h1>
-        <p>مختارات أدبية وأبيات خالدة من عيون الشعر العربي</p>
+        <div class="nav-container">
+            <a href="#" class="logo"><i class="fas fa-code"></i> منصة برمج</a>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#courses">الدورات</a></li>
+                <li><a href="#features">مميزاتنا</a></li>
+                <li><a href="#contact">اتصل بنا</a></li>
+            </ul>
+            <a href="#courses" class="btn-primary">ابدأ التعلم الآن</a>
+        </div>
     </header>
 
-    <div class="container" id="poemsContainer">
-        <!-- الأبيات ستظهر هنا ديناميكياً عبر الجافاسكريبت -->
-    </div>
-
-    <div class="container">
-        <div class="add-poem-section">
-            <h3>أضف بيتاً للشعر</h3>
-            <form id="poemForm">
-                <div class="form-group">
-                    <label for="verseFirst">الشطر الأول</label>
-                    <input type="text" id="verseFirst" class="form-control" placeholder="مثال: ألا ليت الشباب يرجع يوماً" required>
-                </div>
-                <div class="form-group">
-                    <label for="verseSecond">الشطر الثاني</label>
-                    <input type="text" id="verseSecond" class="form-control" placeholder="مثال: فأخبره بما فعل المشيبُ" required>
-                </div>
-                <div class="form-group">
-                    <label for="poetName">اسم الشاعر</label>
-                    <input type="text" id="poetName" class="form-control" placeholder="مثال: أبو العتاهية" required>
-                </div>
-                <button type="submit" class="btn-submit">نشر البيت في الديوان</button>
-            </form>
+    <!-- القسم الرئيسي -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>ابدأ رحلتك في عالم البرمجة من الصفر حتى الاحتراف</h1>
+            <p>تعلم لغات البرمجة الأكثر طلباً في سوق العمل من خلال مسارات تعليمية تفاعلية ومشاريع عملية حقيقية.</p>
+            <a href="#courses" class="btn-primary" style="font-size: 1.1rem; padding: 0.8rem 2rem;">تصفح الدورات</a>
         </div>
-    </div>
+    </section>
 
+    <!-- قسم الدورات البرمجية -->
+    <section id="courses" class="courses">
+        <h2 class="section-title">مسارات التعلم المتاحة</h2>
+        <div class="courses-grid">
+            
+            <!-- دورة 1 -->
+            <div class="course-card">
+                <div class="course-header">
+                    <i class="fab fa-html5"></i> تطوير واجهات الويب
+                </div>
+                <div class="course-body">
+                    <p>تعلم أساسيات بناء وتصميم المواقع الإلكترونية باستخدام HTML, CSS, و JavaScript.</p>
+                    <a href="#" class="btn-primary" style="display: block; text-align: center;">سجل في الدورة</a>
+                </div>
+            </div>
+
+            <!-- دورة 2 -->
+            <div class="course-card">
+                <div class="course-header" style="background-color: var(--accent-color);">
+                    <i class="fab fa-python"></i> لغة بايثون للجميع
+                </div>
+                <div class="course-body">
+                    <p>اكتشف عالم البرمجة بلغة بايثون السسهلة والمستخدمة في الذكاء الاصطناعي وتحليل البيانات.</p>
+                    <a href="#" class="btn-primary" style="display: block; text-align: center; background-color: var(--accent-color);">سجل في الدورة</a>
+                </div>
+            </div>
+
+            <!-- دورة 3 -->
+            <div class="course-card">
+                <div class="course-header" style="background-color: #f59e0b;">
+                    <i class="fas fa-database"></i> قواعد البيانات و SQL
+                </div>
+                <div class="course-body">
+                    <p>تعلم كيفية إدارة قواعد البيانات وتخزين واسترجاع المعلومات بكفاءة عالية واحترافية.</p>
+                    <a href="#" class="btn-primary" style="display: block; text-align: center; background-color: #f59e0b;">سجل في الدورة</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- التذييل -->
     <footer>
-        <p>جميع الحقوق محفوظة &copy; 2026 ديوان الحرف</p>
+        <p>جميع الحقوق محفوظة &copy; 2026 - منصة برمج التعليمية</p>
     </footer>
 
+    <!-- سكريبت تفاعلي بسيط -->
     <script>
-        // قاعدة بيانات أولية للأبيات
-        let poems = [
-            {
-                first: "سأصبر حتى يعجز الصبر عن صبري",
-                second: "سأصبر حتى ينظر الله في أمري",
-                poet: "الإمام الشافعي"
-            },
-            {
-                first: "وإذا العناية لاحظتك عيونها",
-                second: "نام فالمحارث كلهن حراسة",
-                poet: "الإمام الشافعي"
-            },
-            {
-                first: "أنا الذي نظل الأعمى إلى أدبي",
-                second: "وأسمعت كلماتي من به صممُ",
-                poet: "المتنبي"
-            }
-        ];
-
-        const poemsContainer = document.getElementById('poemsContainer');
-        const poemForm = document.getElementById('poemForm');
-
-        // دالة لعرض الأبيات
-        function renderPoems() {
-            poemsContainer.innerHTML = '';
-            poems.forEach((poem, index) => {
-                const card = document.createElement('div');
-                card.className = 'poem-card';
-                card.innerHTML = `
-                    <div class="poem-content">
-                        <span class="poem-verse">${poem.first}</span>
-                        <span class="poem-verse">${poem.second}</span>
-                    </div>
-                    <div class="poet-info">
-                        <span class="poet-name">الشاعر: ${poem.poet}</span>
-                        <div class="card-actions">
-                            <button class="btn-action" onclick="copyPoem('${poem.first}', '${poem.second}', '${poem.poet}')">نسخ</button>
-                        </div>
-                    </div>
-                `;
-                poemsContainer.appendChild(card);
+        // تأثير ترحيلي بسيط عند الضغط على الروابط
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
-        }
-
-        // دالة نسخ البيت الشعري
-        function copyPoem(first, second, poet) {
-            const textToCopy = `${first}\n${second}\n\n- الشاعر: ${poet}`;
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                alert('تم نسخ البيت بنجاح!');
-            });
-        }
-
-        // معالجة نموذج إضافة بيت جديد
-        poemForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const first = document.getElementById('verseFirst').value;
-            const second = document.getElementById('verseSecond').value;
-            const poet = document.getElementById('poetName').value;
-
-            poems.unshift({ first, second, poet }); // إضافة البيت الجديد في البداية
-            renderPoems();
-            poemForm.reset();
         });
-
-        // تشغيل الدالة عند تحميل الصفحة
-        renderPoems();
     </script>
 </body>
 </html>
